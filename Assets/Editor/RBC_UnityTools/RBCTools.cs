@@ -9,7 +9,7 @@ class RBCTools : EditorWindow {
     int curSearchOption = 0;
     string[] searchOption = new string[] { "Exact name", "Contains string" };
     int curComponent = 0;
-    public string[] component_list = new string[] { "BoxCollider", "Animator", };
+    public string[] component_list = new string[] { "AudioSource", "Animator", "BoxCollider"};
     string ObjecToSearch = "";
     string NewName = "";
     string NewTag = "";
