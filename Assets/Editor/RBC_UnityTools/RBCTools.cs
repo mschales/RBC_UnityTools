@@ -9,7 +9,7 @@ class RBCTools : EditorWindow {
     int curSearchOption = 0;
     string[] searchOption = new string[] { "Exact name", "Contains string" };
     int curComponent = 0;
-    public string[] component_list = new string[] { "AudioSource", "Animator", "BoxCollider", "MeshCollider", "CapsuleCollider" };
+    public string[] component_list = new string[] { "AudioSource", "Animator", "Light", "BoxCollider", "CapsuleCollider", "MeshCollider", "WheelCollider", "BoxCollider2D", "CapsuleCollider2D", "CircleCollider2D", "EdgeCollider2D", "PolygonCollider2D" };
     string ObjecToSearch = "";
     string NewName = "";
     string NewTag = "";
@@ -76,7 +76,7 @@ class RBCTools : EditorWindow {
             GUILayout.Space (5);
             ExcludeParents = EditorGUILayout.Toggle ("Exclude parents", ExcludeParents);
             GUILayout.Space (5);
-            curComponent = EditorGUILayout.Popup ("Select Function", curComponent, component_list);
+            curComponent = EditorGUILayout.Popup ("Select Component", curComponent, component_list);
             GUILayout.Space (10);
             GUI.backgroundColor = Color.grey;
         }
