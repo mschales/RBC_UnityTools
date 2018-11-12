@@ -89,9 +89,9 @@ class RBCTools : EditorWindow {
         }
     }
 
-    public void UpdateItemName (string itemSearch, string newName, bool excludeParents, string customSuffix) {
+    // COLLECT GAMEOBJECTS //
+    public void GetGameObjects(string itemSearch, bool excludeParents) {
         TempObjects.Clear (); // Let's clear temporary item list
-        FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
 
         if (curSearchOption == 0) {
             if (itemSearch.Length < 2) {
@@ -128,6 +128,11 @@ class RBCTools : EditorWindow {
                 }
             }
         }
+    }
+
+    public void UpdateItemName (string itemSearch, string newName, bool excludeParents, string customSuffix) {
+        GetGameObjects (itemSearch, excludeParents); // Get Scene GameObjects
+        FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
 
         for (int x = 0; x < TempObjects.Count; x++) { // Loop items from temporary item list
             TempObjects[x].gameObject.transform.name = newName; // Change GameObject name with the new defined name
@@ -138,40 +143,8 @@ class RBCTools : EditorWindow {
     }
 
     public void UpdateTags (string itemSearch, string newTag, bool excludeParents) {
-        TempObjects.Clear (); // Let's clear temporary item list
+        GetGameObjects (itemSearch, excludeParents); // Get Scene GameObjects
         FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
-
-        if (curSearchOption == 0) {
-            for (int x = 0; x < FoundGameObjects.Length; x++) {
-                if (FoundGameObjects[x].transform.name == itemSearch && FoundGameObjects[x].transform.childCount == 0) {
-                    if (excludeParents) {
-                        if (FoundGameObjects[x].transform.parent == null) TempObjects.Add (FoundGameObjects[x].transform); // Add found items (without parent) into temporary item list
-                    }
-
-                    else {
-                        TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
-                    }
-                }
-            }
-        }
-
-        else if (curSearchOption == 1) {
-            if (itemSearch.Length < 2) {
-                Debug.LogWarning ("Item name must be at least 2 characters"); return;
-            }
-
-            for (int x = 0; x < FoundGameObjects.Length; x++) {
-                if (FoundGameObjects[x].transform.name.Contains (itemSearch) && FoundGameObjects[x].transform.childCount == 0) {
-                    if (excludeParents) {
-                        if (FoundGameObjects[x].transform.parent == null) TempObjects.Add (FoundGameObjects[x].transform); // Add found items (without parent) into temporary item list
-                    }
-
-                    else {
-                        TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
-                    }
-                }
-            }
-        }
 
         for (int x = 0; x < TempObjects.Count; x++) { // Loop items from temporary item list
             TempObjects[x].gameObject.transform.tag = newTag; // Change GameObject (defined as go) name with the new defined name
@@ -179,44 +152,8 @@ class RBCTools : EditorWindow {
     }
 
     public void UpdateStatic (string itemSearch, bool setStatic, bool excludeParents) {
-        TempObjects.Clear (); // Let's clear temporary item list
+        GetGameObjects (itemSearch, excludeParents); // Get Scene GameObjects
         FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
-
-        if (curSearchOption == 0) {
-            if (itemSearch.Length < 2) {
-                Debug.LogError ("Item name must be at least 2 characters"); return;
-            }
-
-            for (int x = 0; x < FoundGameObjects.Length; x++) {
-                if (FoundGameObjects[x].transform.name == itemSearch && FoundGameObjects[x].transform.childCount == 0) {
-                    if (excludeParents) {
-                        if (FoundGameObjects[x].transform.parent == null) TempObjects.Add (FoundGameObjects[x].transform); // Add found items (without parent) into temporary item list
-                    }
-
-                    else {
-                        TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
-                    }
-                }
-            }
-        }
-
-        else if (curSearchOption == 1) {
-            if (itemSearch.Length < 2) {
-                Debug.LogWarning ("Item name must be at least 2 characters"); return;
-            }
-
-            for (int x = 0; x < FoundGameObjects.Length; x++) {
-                if (FoundGameObjects[x].transform.name.Contains (itemSearch) && FoundGameObjects[x].transform.childCount == 0) {
-                    if (excludeParents) {
-                        if (FoundGameObjects[x].transform.parent == null) TempObjects.Add (FoundGameObjects[x].transform); // Add found items (without parent) into temporary item list
-                    }
-
-                    else {
-                        TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
-                    }
-                }
-            }
-        }
 
         for (int x = 0; x < TempObjects.Count; x++) { // Loop items from temporary item list
             TempObjects[x].gameObject.isStatic = setStatic; // Change GameObject (defined as go) name with the new defined name
@@ -224,44 +161,8 @@ class RBCTools : EditorWindow {
     }
 
     public void UpdateComponent (string itemSearch, int curComponent, bool excludeParents) {
-        TempObjects.Clear (); // Let's clear temporary item list
+        GetGameObjects (itemSearch, excludeParents); // Get Scene GameObjects
         FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
-
-        if (curSearchOption == 0) {
-            if (itemSearch.Length < 2) {
-                Debug.LogError ("Item name must be at least 2 characters"); return;
-            }
-
-            for (int x = 0; x < FoundGameObjects.Length; x++) {
-                if (FoundGameObjects[x].transform.name == itemSearch && FoundGameObjects[x].transform.childCount == 0) {
-                    if (excludeParents) {
-                        if (FoundGameObjects[x].transform.parent == null) TempObjects.Add (FoundGameObjects[x].transform); // Add found items (without parent) into temporary item list
-                    }
-
-                    else {
-                        TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
-                    }
-                }
-            }
-        }
-
-        else if (curSearchOption == 1) {
-            if (itemSearch.Length < 2) {
-                Debug.LogWarning ("Item name must be at least 2 characters"); return;
-            }
-
-            for (int x = 0; x < FoundGameObjects.Length; x++) {
-                if (FoundGameObjects[x].transform.name.Contains (itemSearch) && FoundGameObjects[x].transform.childCount == 0) {
-                    if (excludeParents) {
-                        if (FoundGameObjects[x].transform.parent == null) TempObjects.Add (FoundGameObjects[x].transform); // Add found items (without parent) into temporary item list
-                    }
-
-                    else {
-                        TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
-                    }
-                }
-            }
-        }
 
         for (int x = 0; x < TempObjects.Count; x++) { // Loop items from temporary item list
             DestroyImmediate (TempObjects[x].gameObject.GetComponent (component_list[curComponent])); // Change GameObject name with the new defined name
