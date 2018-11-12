@@ -8,11 +8,8 @@ class RBCTools : EditorWindow {
     string[] c_options = new string[] { "Change name", "Update tags", "Update Static option", "Remove Component" };
     int curSearchOption = 0;
     string[] searchOption = new string[] { "Exact name", "Contains string" };
-
     int curComponent = 0;
     public string[] component_list = new string[] { "BoxCollider", "Animator", };
-
-
     string ObjecToSearch = "";
     string NewName = "";
     string NewTag = "";
