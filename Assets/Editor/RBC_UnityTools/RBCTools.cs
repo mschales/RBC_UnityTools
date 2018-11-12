@@ -104,9 +104,7 @@ class RBCTools : EditorWindow {
                         if (FoundGameObjects[x].transform.parent == null) TempObjects.Add (FoundGameObjects[x].transform); // Add found items (without parent) into temporary item list
                     }
 
-                    else {
-                        TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
-                    }
+                    else TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
                 }
             }
         }
@@ -122,9 +120,7 @@ class RBCTools : EditorWindow {
                         if (FoundGameObjects[x].transform.parent == null) TempObjects.Add (FoundGameObjects[x].transform);
                     }
 
-                    else {
-                        TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
-                    }
+                    else TempObjects.Add (FoundGameObjects[x].transform);  // Add found items into temporary item list
                 }
             }
         }
