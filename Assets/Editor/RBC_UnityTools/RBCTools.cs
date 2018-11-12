@@ -72,6 +72,8 @@ class RBCTools : EditorWindow {
     // COLLECT GAMEOBJECTS
     public void GetGameObjects (string itemSearch, bool excludeParents) {
         TempObjects.Clear (); // Let's clear temporary item list
+        FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
+
         if (curSearchOption == 0) {
             if (itemSearch.Length < 2) {
                 Debug.LogError ("Item name must be at least 2 characters"); return;
@@ -106,7 +108,6 @@ class RBCTools : EditorWindow {
     // FUNCTIONS
     public void UpdateItemName (string itemSearch, string newName, bool excludeParents, string customSuffix) {
         GetGameObjects (itemSearch, excludeParents); // Get Scene GameObjects
-        FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
         for (int x = 0; x < TempObjects.Count; x++) { // Loop items from temporary item list
             TempObjects[x].gameObject.transform.name = newName; // Change GameObject name with the new defined name
             if (CustomSuffix.Length > 1) {
@@ -117,7 +118,6 @@ class RBCTools : EditorWindow {
 
     public void UpdateTags (string itemSearch, string newTag, bool excludeParents) {
         GetGameObjects (itemSearch, excludeParents); // Get Scene GameObjects
-        FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
         for (int x = 0; x < TempObjects.Count; x++) { // Loop items from temporary item list
             TempObjects[x].gameObject.transform.tag = newTag; // Change GameObject (defined as go) name with the new defined name
         }
@@ -125,7 +125,6 @@ class RBCTools : EditorWindow {
 
     public void UpdateStatic (string itemSearch, bool setStatic, bool excludeParents) {
         GetGameObjects (itemSearch, excludeParents); // Get Scene GameObjects
-        FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
         for (int x = 0; x < TempObjects.Count; x++) { // Loop items from temporary item list
             TempObjects[x].gameObject.isStatic = setStatic; // Change GameObject (defined as go) name with the new defined name
         }
@@ -133,7 +132,6 @@ class RBCTools : EditorWindow {
 
     public void UpdateComponent (string itemSearch, int curComponent, bool excludeParents) {
         GetGameObjects (itemSearch, excludeParents); // Get Scene GameObjects
-        FoundGameObjects = FindObjectsOfType<GameObject> (); // Add scene gameobjects into list
         for (int x = 0; x < TempObjects.Count; x++) { // Loop items from temporary item list
             DestroyImmediate (TempObjects[x].gameObject.GetComponent (component_list[curComponent])); // Change GameObject name with the new defined name
         }
